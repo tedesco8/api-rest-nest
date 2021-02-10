@@ -5,6 +5,7 @@
 env/
 env
 .env
+orm.config.json
 # Logs
 logs
 *.log

@@ -9,16 +9,18 @@ export const databaseProviders = [
     TypeOrmModule.forRootAsync({
         imports: [ConfigModule],
         inject: [ConfigService],
-        async useFactory(config: ConfigService){
-        return {
-            ssl: true,
-            type: 'mongodb' as 'mongodb',
-            host: config.get(Configuration.HOST_LOCAL),
-            username: config.get(Configuration.USR_DB_LOCAL),
-            password: config.get(Configuration.PWD_DB_LOCAL),
-            entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-            migrations: [__dirname + '/migrations/*{.ts,.js}']
-        } as ConnectionOptions
-    }
+        async useFactory(config: ConfigService) {
+            return {
+                ssl: true,
+                useUnifiedTopology: true,
+                useNewUrlParser: true,
+                type: 'mongodb' as 'mongodb',
+                host: config.get(Configuration.HOST_LOCAL),
+                username: config.get(Configuration.USR_DB_LOCAL),
+                password: config.get(Configuration.PWD_DB_LOCAL),
+                entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+                migrations: [__dirname + '/migrations/*{.ts,.js}']
+            } as ConnectionOptions
+        }
     }),
 ];
